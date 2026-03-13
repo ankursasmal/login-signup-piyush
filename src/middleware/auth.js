@@ -1,5 +1,5 @@
 const jwt=require('jsonwebtoken');
-const { default: User } = require('../model/usermodel');
+const { default: User } = require('../model/userModel');
  
 const authGuard= async(req,res,next)=>{
     try{

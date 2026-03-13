@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { default: User } = require("../../model/usermodel");
+const { default: User } = require("../../model/userModel");
  
 const LoginRout = async (req, res) => {
   try {
