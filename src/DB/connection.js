@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI || `mongodb://localhost:27017/login-signup-portal`, {
+        await mongoose.connect(process.env.MONGO_URI || `mongodb+srv://loklinkbusiness_db_user:loklink123@cluster0.pekx4am.mongodb.net/loginAdmin?retryWrites=true&w=majority&appName=Cluster0`, {
             serverSelectionTimeoutMS: 5000
         });
         console.log('MongoDB connected');
