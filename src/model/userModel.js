@@ -36,6 +36,12 @@ email: {
     type: String
   },
 
+question: [
+  {
+    question: String,
+    _id: false
+  }
+],
   paymentType: {
     type: String,
     enum: ["netbanking", "card"]
