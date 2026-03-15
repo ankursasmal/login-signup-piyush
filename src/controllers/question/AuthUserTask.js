@@ -5,6 +5,7 @@ const AuthUserTask = async (req, res) => {
   try {
 
     const id = req.user._id;
+    
 
     const user = await User.findById(id).select("question");
     
@@ -14,7 +15,12 @@ const AuthUserTask = async (req, res) => {
         message: "User not found"
       });
     }
-    const questions = user.question.reverse();
+   user.lastActive = new Date();
+    user.status = "online";  
+
+        await existingUser.save();
+
+      const questions = user.question.reverse();
 
     res.status(200).json({
       success: true,

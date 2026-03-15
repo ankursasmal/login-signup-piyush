@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { default: User } = require("../../model/userModel");
- 
+
 const LoginRout = async (req, res) => {
   try {
 
@@ -42,6 +42,12 @@ const LoginRout = async (req, res) => {
       });
     }
 
+    // 🔹 Update activity status
+    existingUser.lastActive = new Date();
+    existingUser.status = "online";
+
+    await existingUser.save();
+
     // Create token
     const token = jwt.sign(
       {
@@ -68,7 +74,9 @@ const LoginRout = async (req, res) => {
         name: existingUser.name,
         email: existingUser.email,
         role: existingUser.role,
-        token:token
+        token: token,
+        status: existingUser.status,
+        lastActive: existingUser.lastActive
       }
     });
 

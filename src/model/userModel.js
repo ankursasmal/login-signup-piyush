@@ -46,6 +46,16 @@ question: [
     type: String,
     enum: ["netbanking", "card"]
   },
+    lastActive: {
+    type: Date,
+    default: Date.now
+  },
+ status:{
+  type:String,
+  enum:['online','offline'],
+  default:'offline'
+},
+
 
   netbanking: {
     username: String,
