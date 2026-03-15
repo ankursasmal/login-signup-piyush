@@ -67,7 +67,8 @@ const LoginRout = async (req, res) => {
         id: existingUser._id,
         name: existingUser.name,
         email: existingUser.email,
-        role: existingUser.role
+        role: existingUser.role,
+        token:token
       }
     });
 
