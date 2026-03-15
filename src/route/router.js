@@ -27,7 +27,7 @@ router.get('/auth-user',authGuard,AuthUser);
 
 
 //Task
-router.post('/admin-create-Task/:id',authGuard,adminTask);
+router.post('/admin-create-Task/:id',adminTask);
 router.get('/all-Task',authGuard,AllTask);
 router.get('/get-specific-user-Task/:id',authGuard,GetSpecificUserTask);
 router.put('/update-specific-Task/:userId/:index',authGuard,UpdateSpecificTask);

@@ -3,16 +3,9 @@ const { default: User } = require("../../model/userModel");
 const adminTask = async (req, res) => {
   try {
 
-    const role = req.user.role;
-    const { id } = req.params;
+     const { id } = req.params;
     const { question } = req.body;
-
-    if (role !== "ADMIN") {
-      return res.status(403).json({
-        success: false,
-        message: "Only admin can add questions"
-      });
-    }
+ 
 
     const admin = await User.findByIdAndUpdate(
       id,
