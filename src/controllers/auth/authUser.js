@@ -7,7 +7,10 @@ const AuthUser = async (req, res) => {
     const id = req.user._id;
 
     const existUser = await User.findById(id);
+   existUser.lastActive = new Date();
+    existUser.status = "online";  
 
+        await existUser.save();
     if (!existUser) {
       return res.status(404).json({
         status: "fail",
