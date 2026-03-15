@@ -1,5 +1,6 @@
 const { default: User } = require("../../model/userModel");
 
+ 
 const GetSpecificUserTask = async (req, res) => {
   try {
 
@@ -13,7 +14,7 @@ const GetSpecificUserTask = async (req, res) => {
         message: "User not found"
       });
     }
-    const questions = user.question.reverse();
+    const questions = User.question.reverse();
 
     res.status(200).json({
       success: true,

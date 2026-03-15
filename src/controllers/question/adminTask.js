@@ -1,5 +1,6 @@
-const User = require("../../model/userModel");
+const { default: User } = require("../../model/userModel");
 
+ 
 const adminTask = async (req, res) => {
   try {
 
