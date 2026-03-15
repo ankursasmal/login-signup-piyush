@@ -1,6 +1,6 @@
 const User = require("../../model/userModel");
 
-const adminQuestion = async (req, res) => {
+const adminTask = async (req, res) => {
   try {
 
     const role = req.user.role;
@@ -38,4 +38,4 @@ const adminQuestion = async (req, res) => {
   }
 };
 
-module.exports = adminQuestion;
+module.exports = adminTask;

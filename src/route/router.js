@@ -7,11 +7,12 @@ const { LoginRout } = require('../controllers/auth/Login');
 const { LogoutRout } = require('../controllers/auth/Logout');
 const { SignupRout } = require('../controllers/auth/signup');
  const authGuard = require('../middleware/auth');
-const adminQuestion = require('../controllers/question/adminQuestion');
-const { AllQuestion } = require('../controllers/question/allQuestion');
-const { GetSpecificUserQuestion } = require('../controllers/question/GetSpecificUserQuestion');
-const { UpdateSpecificQuestion } = require('../controllers/question/UpdateSpecificQuestion');
-const { deleteSpecificQuestion } = require('../controllers/question/deleteSpecificQuestion');
+const adminTask = require('../controllers/question/adminTask');
+const { AllTask } = require('../controllers/question/allTask');
+const { GetSpecificUserTask } = require('../controllers/question/GetSpecificUserTask');
+const { UpdateSpecificTask } = require('../controllers/question/UpdateSpecificTask');
+const { deleteSpecificTask } = require('../controllers/question/deleteSpecificTask');
+ 
   cookieParser();
 router.get('/', (req, res) => {
     res.json({ message: 'Welcome to the API' });
@@ -24,12 +25,12 @@ router.put('/account-approval/:id',authGuard,AccountApproval);
 router.get('/auth-user',authGuard,AuthUser);
 
 
-//question
-router.put('/admin-create-question/:id',authGuard,adminQuestion);
-router.get('/all-question',authGuard,AllQuestion);
-router.get('/get-specific-user-question/:id',authGuard,GetSpecificUserQuestion);
-router.put('/update-specific-question/:userId/:index',authGuard,UpdateSpecificQuestion);
-router.delete('/delete-specific-question/:userId/:index',authGuard,deleteSpecificQuestion);
+//Task
+router.put('/admin-create-Task/:id',authGuard,adminTask);
+router.get('/all-Task',authGuard,AllTask);
+router.get('/get-specific-user-Task/:id',authGuard,GetSpecificUserTask);
+router.put('/update-specific-Task/:userId/:index',authGuard,UpdateSpecificTask);
+router.delete('/delete-specific-Task/:userId/:index',authGuard,deleteSpecificTask);
 
 
 

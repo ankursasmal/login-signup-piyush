@@ -7,7 +7,7 @@ app.set('trust proxy', 1);
 
 const router = require('./route/router');
  
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const connectDB = require('./DB/connection');

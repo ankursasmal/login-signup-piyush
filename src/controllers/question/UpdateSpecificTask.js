@@ -1,6 +1,6 @@
 const { default: User } = require("../../model/userModel");
 
-const UpdateSpecificQuestion = async (req, res) => {
+const UpdateSpecificTask = async (req, res) => {
   try {
 
     const { userId, index } = req.params;
@@ -44,4 +44,4 @@ const UpdateSpecificQuestion = async (req, res) => {
   }
 };
 
-module.exports = { UpdateSpecificQuestion };
+module.exports = { UpdateSpecificTask };

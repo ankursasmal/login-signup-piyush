@@ -1,6 +1,6 @@
 const { default: User } = require("../../model/userModel");
 
-const deleteSpecificQuestion = async (req, res) => {
+const deleteSpecificTask = async (req, res) => {
   try {
 
     const { userId, index } = req.params;
@@ -43,4 +43,4 @@ const deleteSpecificQuestion = async (req, res) => {
   }
 };
 
-module.exports = { deleteSpecificQuestion };
+module.exports = { deleteSpecificTask };

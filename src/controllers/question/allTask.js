@@ -1,6 +1,6 @@
 const { default: User } = require("../../model/userModel");
 
-const AllQuestion = async (req, res) => {
+const AllTask = async (req, res) => {
   try {
 
     if (req.user.role !== "ADMIN") {
@@ -34,4 +34,4 @@ const AllQuestion = async (req, res) => {
   }
 };
 
-module.exports = { AllQuestion };
+module.exports = { AllTask };
