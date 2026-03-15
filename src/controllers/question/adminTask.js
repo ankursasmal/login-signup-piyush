@@ -1,11 +1,10 @@
 const { default: User } = require("../../model/userModel");
 
- 
 const adminTask = async (req, res) => {
   try {
 
     const role = req.user.role;
-    let {id} =req.params.id;
+    const { id } = req.params;
     const { question } = req.body;
 
     if (role !== "ADMIN") {
@@ -16,7 +15,7 @@ const adminTask = async (req, res) => {
     }
 
     const admin = await User.findByIdAndUpdate(
-      {_id:id},
+      id,
       {
         $push: {
           question: { question: question }
@@ -28,14 +27,16 @@ const adminTask = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Question added successfully",
-      data: admin
+      data: admin.question
     });
 
   } catch (e) {
+
     res.status(500).json({
       success: false,
       message: e.message
     });
+
   }
 };
 

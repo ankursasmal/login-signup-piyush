@@ -14,7 +14,7 @@ const GetSpecificUserTask = async (req, res) => {
         message: "User not found"
       });
     }
-    const questions = User.question.reverse();
+    const questions = user.question.reverse();
 
     res.status(200).json({
       success: true,
