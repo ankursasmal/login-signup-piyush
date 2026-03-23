@@ -29,7 +29,7 @@ router.get('/auth-user',authGuard,AuthUser);
 
 //Task
 router.post('/admin-create-Task/:id',adminTask);
-router.get('/all-Task',AllTask);
+router.get('/all-Task',authGuard,AllTask);
 router.get('/get-specific-user-Task/:id',authGuard,GetSpecificUserTask);
 router.put('/update-specific-Task/:userId/:index',authGuard,UpdateSpecificTask);
 router.delete('/delete-specific-Task/:userId/:index',authGuard,deleteSpecificTask);
