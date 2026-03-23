@@ -60,10 +60,10 @@ const LoginRout = async (req, res) => {
 
     // Store cookie
     res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 365 * 24 * 60 * 60 * 1000
+       httpOnly: true,
+  secure: true,         
+  sameSite: "None",    
+  maxAge: 365 * 24 * 60 * 60 * 1000
     });
 
     res.status(200).json({
