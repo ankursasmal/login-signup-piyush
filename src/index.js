@@ -1,42 +1,39 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-
-// 🔥 ADD THIS LINE
-app.set('trust proxy', 1);
-
 const router = require('./route/router');
- 
-const port = process.env.PORT || 5000;
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const connectDB = require('./DB/connection');
 
-// Increase payload size limit
-app.use(express.json({ limit: "50mb" })); 
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
+const port = process.env.PORT || 5000;
 
-app.use(cookieParser());
+app.set('trust proxy', 1);
+
+// ✅ CORS must be FIRST
 app.use(cors({
   origin: [
     "http://localhost:5173",
     "https://login-signup-piyush-frontend.vercel.app",
     "https://create-task-kappa.vercel.app"
-      
-  ], 
+  ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
 }));
 
+// ✅ Cookie parser second
+app.use(cookieParser());
+
+// ✅ Body parsers after
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+// ✅ Routes last
 app.use('/api', router);
 
-
- 
- 
- 
 connectDB();
- 
+
 app.listen(port, () => {
-  console.log(`Server (HTTP+WebSocket) running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
