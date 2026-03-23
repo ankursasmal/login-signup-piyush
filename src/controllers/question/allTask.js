@@ -4,12 +4,7 @@ const { default: User } = require("../../model/userModel");
 const AllTask = async (req, res) => {
   try {
 
-    if (req.user.role !== "ADMIN") {
-      return res.status(401).json({
-        status: "fail",
-        message: "Unauthorized"
-      });
-    }
+    
 
     const users = await User.find().select("question");
 
