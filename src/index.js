@@ -20,7 +20,8 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://login-signup-piyush-frontend.vercel.app"
+    "https://login-signup-piyush-frontend.vercel.app",
+    "https://create-task-kappa.vercel.app"
       
   ], 
   credentials: true,
