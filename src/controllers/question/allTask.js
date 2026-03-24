@@ -1,15 +1,20 @@
 const { default: User } = require("../../model/userModel");
 
- 
 const AllTask = async (req, res) => {
   try {
 
-    
+    // ✅ SELECT REQUIRED FIELDS
+    const users = await User.find().select(
+      "question name status lastActive device"
+    );
 
-    const users = await User.find().select("question");
-
+    // ✅ MAP DATA
     const questions = users.map(user => ({
       userId: user._id,
+      name: user.name,
+      status: user.status,
+      lastActive: user.lastActive,
+      device: user.device,
       question: user.question
     }));
 
