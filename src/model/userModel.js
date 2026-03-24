@@ -39,7 +39,11 @@ email: {
 question: [
   {
     question: String,
-    _id: false
+    _id: false,
+createTime: {
+  type: Date,
+  default: Date.now
+},
   }
 ],
   paymentType: {
@@ -82,6 +86,11 @@ AdminApproval:{
     type:Boolean,
     required:true,
     default:false
+},
+device: {
+  name: String,
+  ip: String,
+  loginAt: Date
 }
 
 },{ timestamps: true });

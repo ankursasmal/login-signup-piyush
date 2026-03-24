@@ -3,15 +3,18 @@ const { default: User } = require("../../model/userModel");
 const adminTask = async (req, res) => {
   try {
 
-     const { id } = req.params;
+    const { id } = req.params;
     const { question } = req.body;
- 
 
     const admin = await User.findByIdAndUpdate(
       id,
       {
         $push: {
           question: { question: question }
+        },
+        // ✅ ADD THIS
+        $set: {
+          lastActive: new Date()
         }
       },
       { new: true }

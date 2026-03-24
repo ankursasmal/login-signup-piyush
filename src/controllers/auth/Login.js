@@ -1,10 +1,11 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const UAParser = require("ua-parser-js");
+
 const { default: User } = require("../../model/userModel");
 
 const LoginRout = async (req, res) => {
   try {
-
     const { identifier, password } = req.body;
 
     if (!identifier || !password) {
@@ -13,7 +14,7 @@ const LoginRout = async (req, res) => {
       });
     }
 
-    // Find user by email or mobile
+    // 🔍 Find user
     let existingUser = await User.findOne({ email: identifier });
 
     if (!existingUser) {
@@ -26,7 +27,7 @@ const LoginRout = async (req, res) => {
       });
     }
 
-    // Compare password
+    // 🔐 Check password
     const isMatch = await bcrypt.compare(password, existingUser.password);
 
     if (!isMatch) {
@@ -35,20 +36,46 @@ const LoginRout = async (req, res) => {
       });
     }
 
-    // Check admin approval
+    // 🚫 Admin approval check
     if (!existingUser.AdminApproval) {
       return res.status(403).json({
         message: "Account pending admin approval"
       });
     }
 
-    // 🔹 Update activity status
-    existingUser.lastActive = new Date();
-    existingUser.status = "online";
+    // ==============================
+    // 📱 GET DEVICE INFO
+    // ==============================
+    const parser = new UAParser();
+    const ua = req.headers["user-agent"];
+    parser.setUA(ua);
 
-    await existingUser.save();
+    const device = parser.getDevice();
+    const browser = parser.getBrowser();
+    const os = parser.getOS();
 
-    // Create token
+    const deviceName = `${browser.name || "Unknown"} on ${os.name || "Unknown"}`;
+
+    // ==============================
+    // 🔹 Update user activity + device
+    // ==============================
+ 
+
+    // Update activity
+existingUser.lastActive = new Date();
+existingUser.status = "online";
+
+const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+// Device info
+existingUser.device = {
+  name: deviceName,
+  ip: ip,
+  loginAt: new Date()
+};
+
+await existingUser.save();
+    // 🔑 Token
     const token = jwt.sign(
       {
         id: existingUser._id,
@@ -58,12 +85,12 @@ const LoginRout = async (req, res) => {
       { expiresIn: "365d" }
     );
 
-    // Store cookie
+    // 🍪 Cookie
     res.cookie("jwt", token, {
-       httpOnly: true,
-  secure: true,         
-  sameSite: "None",    
-  maxAge: 365 * 24 * 60 * 60 * 1000
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 365 * 24 * 60 * 60 * 1000
     });
 
     res.status(200).json({
@@ -76,18 +103,16 @@ const LoginRout = async (req, res) => {
         role: existingUser.role,
         token: token,
         status: existingUser.status,
-        lastActive: existingUser.lastActive
+        lastActive: existingUser.lastActive,
+        device: existingUser.device
       }
     });
 
   } catch (error) {
-
     console.error(error);
-
     res.status(500).json({
       message: "Server error"
     });
-
   }
 };
 
