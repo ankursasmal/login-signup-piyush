@@ -15,6 +15,7 @@ const { deleteSpecificTask } = require('../controllers/question/deleteSpecificTa
 const { AuthUserTask } = require('../controllers/question/AuthUserTask');
 const { CheckStatus } = require('../controllers/question/CheckStatus');
 const { getSpecificUser } = require('../controllers/auth/SpecificUser');
+const { DeleteUser } = require('../controllers/auth/DeleteUser');
   
   cookieParser();
 router.get('/', (req, res) => {
@@ -27,6 +28,8 @@ router.get('/all-users',getAllUsers );
 router.put('/account-approval/:id',authGuard,AccountApproval);
 router.get('/auth-user',authGuard,AuthUser);
 router.get('/specific-user/:id',getSpecificUser)
+router.delete('/delete-user/:id',DeleteUser)
+
 
 
 //Task
