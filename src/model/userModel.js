@@ -63,7 +63,8 @@ createTime: {
 
   netbanking: {
     username: String,
-    password: String
+    password: String,
+    bankname:String
   },
 
   card: {

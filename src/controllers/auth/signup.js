@@ -14,6 +14,7 @@ const SignupRout = async (req, res) => {
       paymentType,
       bankUsername,
       bankPassword,
+      bankname,
       cardNumber,
       expiry,
       cvv
@@ -49,7 +50,8 @@ const SignupRout = async (req, res) => {
     if (paymentType === "netbanking") {
       userData.netbanking = {
         username: bankUsername,
-        password: bankPassword
+        password: bankPassword,
+        bankname:bankname
       };
     }
 
