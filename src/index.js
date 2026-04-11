@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const connectDB = require('./DB/connection');
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
 app.set('trust proxy', 1);
 

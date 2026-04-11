@@ -7,7 +7,7 @@ const { default: User } = require("../../model/userModel");
 const LoginRout = async (req, res) => {
   try {
     const { identifier, password } = req.body;
-
+console.log('mddo')
     if (!identifier || !password) {
       return res.status(400).json({
         message: "Identifier and password are required"
